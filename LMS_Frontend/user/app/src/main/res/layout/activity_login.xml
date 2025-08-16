@@ -8,6 +8,15 @@
     android:layout_height="match_parent"
     tools:context=".activity.LoginActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:background="#E2E2E9"
+        app:title="Login"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
 
     <EditText
         android:id="@+id/editLoginEmail"

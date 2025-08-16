@@ -16,7 +16,7 @@ public class ProfileManagementActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_management);
-        getSupportActionBar().setTitle("Profile Management");
+//        getSupportActionBar().setTitle("Profile Management");
 
     }
 }

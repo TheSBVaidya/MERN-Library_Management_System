@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 //import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.user.R;
 import com.example.user.entities.Members;
@@ -28,13 +29,14 @@ public class RegisterActivity extends AppCompatActivity {
 
     EditText editName, editPhone, editEmail, editPasswd;
     Button btnSubmit, btnCancel;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        getSupportActionBar().setTitle("Register");
+//        getSupportActionBar().setTitle("Register");
 
         editName = findViewById(R.id.editName);
         editPhone = findViewById(R.id.editPhone);
@@ -42,8 +44,9 @@ public class RegisterActivity extends AppCompatActivity {
         editPasswd = findViewById(R.id.editPassword);
         btnSubmit = findViewById(R.id.btnSubmit);
         btnCancel = findViewById(R.id.btnCancel);
+        toolbar = findViewById(R.id.toolbar);
 
-//        showInternetConsentDialog();
+        setSupportActionBar(toolbar);
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 
 import com.example.user.R;
@@ -31,19 +32,21 @@ public class LoginActivity extends AppCompatActivity {
     EditText editEmail, editPassword;
     Button btnSubmit, btnCancel, btnRegister;
 
+    Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        getSupportActionBar().setTitle("Login");
-
 
         editEmail = findViewById(R.id.editLoginEmail);
         editPassword = findViewById(R.id.editLoginPassword);
         btnSubmit = findViewById(R.id.btnLoginSubmit);
         btnCancel = findViewById(R.id.btnLoginCancel);
         btnRegister = findViewById(R.id.btnRegister);
+        toolbar = findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar);
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
