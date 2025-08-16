@@ -8,4 +8,11 @@
     android:layout_height="match_parent"
     tools:context=".activity.DashboardActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:backgroundTint="#E2E2E9"
+        app:title="LMS"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
 </LinearLayout>
