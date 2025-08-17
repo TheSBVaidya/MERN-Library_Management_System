@@ -47,6 +47,7 @@ public class DashboardActivity extends AppCompatActivity {
         } else if (id == R.id.action_sign_out) {
             // Handle Sign Out click
             Toast.makeText(this, "Sign Out clicked", Toast.LENGTH_SHORT).show();
+            finish();
             return true;
         }
 

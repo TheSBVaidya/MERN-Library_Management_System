@@ -18,6 +18,8 @@ import com.example.user.entities.Members;
 import com.example.user.utils.ApiService;
 import com.example.user.utils.RetrofitClient;
 import com.example.user.utils.BackendResponse;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -82,9 +84,17 @@ public class RegisterActivity extends AppCompatActivity {
                                 BackendResponse backendResponse = response.body();
 
                                 if ("success".equals(backendResponse.getStatus())) {
-                                    Members membersdata = backendResponse.getMembersData();
-                                    Log.e(TAG, "API Success: " + membersdata.getName());
-                                    Toast.makeText(RegisterActivity.this, "Hello " + membersdata.getName(), Toast.LENGTH_SHORT).show();
+
+                                    JsonElement datElemet = backendResponse.getData();
+                                    
+                                    if (datElemet != null && datElemet.isJsonObject()) {
+                                        Members membersdata = new Gson().fromJson(datElemet, Members.class);
+//                                    Log.e(TAG, "API Success: " + membersdata.);
+                                        Toast.makeText(RegisterActivity.this, "Hello " + membersdata.getName(), Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(RegisterActivity.this, "Registration successful, but received unexpected data format.", Toast.LENGTH_SHORT).show();
+                                    }
+                                    
                                 } else if ("error".equals(backendResponse.getStatus())) {
                                     Log.e(TAG, "API Error: " + backendResponse.getMessage());
                                 }

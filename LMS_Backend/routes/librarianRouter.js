@@ -33,4 +33,42 @@ router.put("/editProfile/:id", (req, resp) => {
   );
 });
 
+//getBookbyId
+router.get("/getBook/:id", (req, resp) => {
+  db.query(
+    "SELECT name, author, subject, price, isbn FROM books WHERE id = ?",
+    [req.params.id],
+    (err, result) => {
+      if (err) return resp.status(404).send(apiError("Book is Not Found"));
+      resp.send(apiSuccess(result[0]));
+    }
+  );
+});
+
+//addBook
+router.post("/addBook", (req, resp) => {
+  const { name, author, subject, price, isbn } = req.body;
+  db.query(
+    "INSERT INTO books(name, author, subject, price, isbn) VALUES(?, ?, ?, ?, ?)",
+    [name, author, subject, price, isbn],
+    (err, result) => {
+      if (err) return resp.status(401).send(apiError(err));
+      resp.send(apiSuccess("New Book Added"));
+    }
+  );
+});
+
+//updateBook
+router.put("/updateBook/:id", (req, resp) => {
+  const { name, author, subject, price, isbn } = req.body;
+  db.query(
+    "UPDATE books SET name = ?, author = ?, subject = ?, price = ?, isbn = ? WHERE id = ?",
+    [name, author, subject, price, isbn, req.params.id],
+    (err, result) => {
+      if (err) return resp.status(404).send(apiError("Book Not Updated"));
+      resp.send(apiSuccess("Book Updated"));
+    }
+  );
+});
+
 module.exports = router;

@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.User">
         <activity
+            android:name=".activity.ChangePasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.ProfileManagementActivity"
             android:exported="false" />
         <activity

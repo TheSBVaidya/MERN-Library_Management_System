@@ -49,4 +49,29 @@ router.get("/getAllBooks", (req, resp) => {
   });
 });
 
+router.patch("/updatePassword/:id", (req, resp) => {
+  const { currentPassword, newPassword } = req.body;
+  db.query(
+    "SELECT password FROM members WHERE id = ?",
+    [req.params.id],
+    (err, result) => {
+      if (err) return resp.status(404).send(apiError("user not found"));
+
+      const dbUser = result[0];
+
+      if (dbUser.password !== currentPassword)
+        return resp.send(apiError("Password is not matching"));
+
+      db.query(
+        "UPDATE members SET password = ? WHERE id = ?",
+        [newPassword, req.params.id],
+        (err, result) => {
+          if (err) return resp.send(apiError(err));
+          resp.send(apiSuccess("Password change successfully"));
+        }
+      );
+    }
+  );
+});
+
 module.exports = router;
