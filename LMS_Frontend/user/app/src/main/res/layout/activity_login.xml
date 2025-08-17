@@ -34,7 +34,7 @@
         android:layout_marginTop="20dp"
         android:hint="Enter Password"
         android:inputType="textPassword"
-        android:text="hashed_password_for_aditi"
+        android:text="Aditi1"
         android:layout_height="55dp"
         android:textSize="20dp" />
 

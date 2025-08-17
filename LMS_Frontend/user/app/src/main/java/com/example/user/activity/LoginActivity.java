@@ -19,6 +19,8 @@ import com.example.user.entities.Members;
 import com.example.user.utils.ApiService;
 import com.example.user.utils.BackendResponse;
 import com.example.user.utils.RetrofitClient;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -73,27 +75,35 @@ public class LoginActivity extends AppCompatActivity {
                             BackendResponse backendResponse = response.body();
 
                             if ("success".equals(backendResponse.getStatus())) {
-                                Members membersdata = backendResponse.getMembersData();
-                                Log.e(TAG, "API Success: " + membersdata.getName());
 
-                                // next page
-                                Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
-                                startActivity(intent);
+                                JsonElement dataElement = backendResponse.getData();
 
+                                if (dataElement != null && dataElement.isJsonObject()) {
+                                    Members membersdata = new Gson().fromJson(dataElement, Members.class);
+//                                    Log.e(TAG, "API Success: " + membersdata.getName());
+                                    Toast.makeText(LoginActivity.this, "Welcome Back: " + membersdata.getName(), Toast.LENGTH_SHORT).show();
 
-                                Toast.makeText(LoginActivity.this, "Welcome Back: " + membersdata.getName(), Toast.LENGTH_SHORT).show();
+                                    // next page
+                                    Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
+                                    startActivity(intent);
+                                } else {
+                                    Toast.makeText(LoginActivity.this, "Login successful, but received unexpected data format.", Toast.LENGTH_SHORT).show();
+                                }
                             } else if ("error".equals(backendResponse.getStatus())) {
-                                Log.e(TAG, "API Error: " + backendResponse.getMessage());
+                                Toast.makeText(LoginActivity.this, "Error: "+backendResponse.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         } else {
-                            Log.e(TAG, "API Error: " + response.code() + " - " + response.message());
+//                            Log.e(TAG, "API Error: " + response.code() + " - " + response.message());
+                            Toast.makeText(LoginActivity.this, "Api Error" + response.code() + " - " + response.message(), Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<BackendResponse> call, Throwable t) {
-                        Log.e(TAG, "Network Failure: " + t.getMessage());
+//                        Log.e(TAG, "Network Failure: " + t.getMessage());
+                        Toast.makeText(LoginActivity.this, "Network Failure:" + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
+
                 });
             }
         });

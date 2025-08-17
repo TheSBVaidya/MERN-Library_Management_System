@@ -1,6 +1,7 @@
 package com.example.user.utils;
 
 import com.example.user.entities.Members;
+import com.google.gson.JsonElement;
 import com.google.gson.annotations.SerializedName;
 
 import lombok.Getter;
@@ -12,7 +13,7 @@ public class BackendResponse {
     private String status;
 
     @SerializedName("data")
-    private Members membersData;
+    private JsonElement data;
 
     @SerializedName("message")
     private String message;

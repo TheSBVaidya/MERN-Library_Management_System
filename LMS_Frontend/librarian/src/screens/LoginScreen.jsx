@@ -1,9 +1,11 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("v.patel@example.com");
   const [password, setPassword] = useState("hashed_password_for_vikram");
+  const navigate = useNavigate();
 
   const handleCancel = () => {
     setName("");
@@ -33,7 +35,8 @@ const LoginScreen = () => {
         alert("Enter Correct Email or Password");
       }
 
-      alert("Hello " + response.data.data.role);
+      // alert("Hello " + response.data.data.role);
+      navigate("/dashboard");
     } catch (err) {
       alert(err);
     }
