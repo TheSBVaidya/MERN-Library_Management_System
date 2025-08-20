@@ -2,6 +2,7 @@ const express = require("express");
 const db = require("../utils/dbpool");
 const { apiSuccess, apiError } = require("../utils/apiresult");
 const e = require("express");
+const { createToken, jwtAuth } = require("../utils/jwtauth");
 const router = express.Router();
 
 const role = "user";
@@ -38,11 +39,14 @@ router.post("/login", (req, resp) => {
     const isMatching = password;
     if (isMatching !== dbUser.password)
       return resp.status(401).send(apiError("Invalid Password"));
-    resp.send(apiSuccess(dbUser));
+
+    //create jwt token and added in resp
+    const token = createToken(dbUser);
+    resp.send(apiSuccess({ ...dbUser, token }));
   });
 });
 
-router.get("/getAllBooks", (req, resp) => {
+router.get("/getAllBooks", jwtAuth, (req, resp) => {
   db.query("SELECT * FROM books", (err, result) => {
     if (err) return resp.send(apiError(err));
     resp.send(apiSuccess(result));
