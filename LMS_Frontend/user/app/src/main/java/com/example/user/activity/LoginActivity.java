@@ -44,7 +44,6 @@ public class LoginActivity extends AppCompatActivity {
         editEmail = findViewById(R.id.editLoginEmail);
         editPassword = findViewById(R.id.editLoginPassword);
         btnSubmit = findViewById(R.id.btnLoginSubmit);
-        btnCancel = findViewById(R.id.btnLoginCancel);
         btnRegister = findViewById(R.id.btnRegister);
         toolbar = findViewById(R.id.toolbar);
 
@@ -80,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                 if (dataElement != null && dataElement.isJsonObject()) {
                                     Members membersdata = new Gson().fromJson(dataElement, Members.class);
-//                                    Log.e(TAG, "API Success: " + membersdata.getName());
+                                    Log.e(TAG, "API Success: " + membersdata.getName());
                                     Toast.makeText(LoginActivity.this, "Welcome Back: " + membersdata.getName(), Toast.LENGTH_SHORT).show();
 
                                     // next page
@@ -93,14 +92,14 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(LoginActivity.this, "Error: "+backendResponse.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         } else {
-//                            Log.e(TAG, "API Error: " + response.code() + " - " + response.message());
+                            Log.e(TAG, "API Error: " + response.code() + " - " + response.message());
                             Toast.makeText(LoginActivity.this, "Api Error" + response.code() + " - " + response.message(), Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<BackendResponse> call, Throwable t) {
-//                        Log.e(TAG, "Network Failure: " + t.getMessage());
+                        Log.e(TAG, "Network Failure: " + t.getMessage());
                         Toast.makeText(LoginActivity.this, "Network Failure:" + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
 
@@ -113,13 +112,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
                 startActivity(intent);
-            }
-        });
-
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
             }
         });
     }

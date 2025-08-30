@@ -42,7 +42,8 @@ router.post("/login", (req, resp) => {
 
     //create jwt token and added in resp
     const token = createToken(dbUser);
-    resp.send(apiSuccess({ ...dbUser, token }));
+    resp.send(apiSuccess(dbUser));
+    // resp.send(apiSuccess({ ...dbUser, token }));
   });
 });
 
@@ -76,6 +77,43 @@ router.patch("/updatePassword/:id", (req, resp) => {
       );
     }
   );
+});
+
+//get available book by Name, author, ISBN, Subject
+router.get("/getBookByNAIS", (req, resp) => {
+  const { name, author, isbn, subject, price } = req.query;
+  let field = null;
+  let value = null;
+
+  if (name) {
+    field = "b.name";
+    value = name + "%";
+  } else if (author) {
+    field = "b.author";
+    value = author + "%";
+  } else if (isbn) {
+    field = "b.isbn";
+    value = isbn + "%";
+  } else if (subject) {
+    field = "b.subject";
+    value = subject + "%";
+  } else if (price) {
+    field = "b.price";
+    value = price + "%";
+  }
+
+  const sql = `
+    SELECT DISTINCT b.*
+    FROM books b
+    JOIN copies c ON b.id = c.book_id
+    WHERE c.status = 'available' AND ${field} LIKE ?
+  `;
+
+  db.query(sql, [value], (err, result) => {
+    if (err) return resp.status(404).send(apiError(err));
+
+    resp.send(apiSuccess(result));
+  });
 });
 
 module.exports = router;

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="search_by_array">
+        <item>Name</item>
+        <item>Author</item>
+        <item>ISBN</item>
+        <item>Subject</item>
+        <item>Price</item>
+    </string-array>
+</resources>
