@@ -1,24 +1,21 @@
 package com.example.user.activity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.user.R;
-import com.example.user.adapter.BooksAdapter;
 import com.example.user.adapter.BorrowedBookAdapter;
-import com.example.user.dto.Book;
 import com.example.user.dto.BorrowedBookDTO;
 import com.example.user.toolbar_set_up.TBSetUp;
 import com.example.user.utils.ApiService;
@@ -38,12 +35,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MyBorrowedBookActivity extends TBSetUp {
+public class MyBorrowedBookActivity extends TBSetUp implements BorrowedBookAdapter.OnBookActionListener {
 
     Toolbar toolbar;
     TextView tvBorrowedBook, tvDueSoon, tvOverdue, tvfines, tvReminder, tvBorrowedBooksTitle;
     RecyclerView booksRecyclerView;
     BorrowedBookAdapter borrowedBookAdapter;
+    private ActivityResultLauncher<Intent> updateProfileLauncher;
+    private int userId;
 
     private static final String TAG = "MyBorrowedBookActivity";
 
@@ -66,14 +65,25 @@ public class MyBorrowedBookActivity extends TBSetUp {
         setUpRecyclerView();
 
         SessionManager sessionManager = new SessionManager(this);
-        int userId = sessionManager.getUserId();
+        userId = sessionManager.getUserId();
         apiGetBorrowedBooks(userId);
+
+        updateProfileLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    // Check if the activity finished successfully
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        // The profile was updated, so refresh the data
+//                        Toast.makeText(this, "Profile refreshed.", Toast.LENGTH_SHORT).show();
+                        apiGetBorrowedBooks(userId); // Re-run the API call to get the latest data
+                    }
+                });
     }
 
     private void setUpRecyclerView() {
         booksRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         // Initialize with an empty list
-        borrowedBookAdapter = new BorrowedBookAdapter(new ArrayList<>(), this);
+        borrowedBookAdapter = new BorrowedBookAdapter(new ArrayList<>(), this, this);
         booksRecyclerView.setAdapter(borrowedBookAdapter);
     }
 
@@ -165,9 +175,36 @@ public class MyBorrowedBookActivity extends TBSetUp {
             tvReminder.setText(String.format(Locale.getDefault(),
                     "Reminder: You have %d book(s) due within the next %d days. Please plan to return them on time to avoid fines.",
                     dueSoonCount, soonestDueDate));
+        } else if (overdueCount > 1){
+            tvReminder.setVisibility(View.VISIBLE);
+            tvReminder.setText("Please Pay the Fine");
         } else {
-            tvReminder.setVisibility(View.GONE);
+            tvReminder.setVisibility(View.VISIBLE);
+            tvReminder.setText("You don't have any due books");
         }
+    }
+
+    @Override
+    public void onReturnBookClicked(BorrowedBookDTO book) {
+        // The activity now handles the navigation
+        Intent intent = new Intent(this, BookDetailsActivity.class);
+        intent.putExtra("Book_ID", book.getBook_id());
+        intent.putExtra("Issue_Records_Id", book.getIssue_records_id());
+        intent.putExtra("SOURCE", "MyBorrowedBookActivity");
+        // Use the launcher to start the activity so we can get a result back
+        updateProfileLauncher.launch(intent);
+    }
+
+    @Override
+    public void onRenewBookClicked(BorrowedBookDTO book) {
+        Toast.makeText(this, "Renew action for: " + book.getName(), Toast.LENGTH_SHORT).show();
+//         TODO: Implement Renew Book API call and logic here
+    }
+
+    @Override
+    public void onPayFineClicked(BorrowedBookDTO book) {
+        Toast.makeText(this, "Pay Fine action for: " + book.getName(), Toast.LENGTH_SHORT).show();
+        // TODO: Implement Pay Fine logic here (e.g., launch payment activity)
     }
 
 }

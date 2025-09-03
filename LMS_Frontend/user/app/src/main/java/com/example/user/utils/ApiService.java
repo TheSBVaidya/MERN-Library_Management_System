@@ -1,6 +1,5 @@
 package com.example.user.utils;
 
-import com.example.user.dto.BorrowedBookDTO;
 import com.example.user.dto.ChangePasswordDTO;
 import com.example.user.entities.Members;
 import java.util.Map;
@@ -40,4 +39,7 @@ public interface ApiService {
 
     @GET("/members/getBookDetails/{id}")
     Call<BackendResponse> getBookDetails(@Path("id") int id);
+
+    @PATCH("/members/returnBook/{id}")
+    Call<BackendResponse> returnBook(@Path("id") int id);
 }

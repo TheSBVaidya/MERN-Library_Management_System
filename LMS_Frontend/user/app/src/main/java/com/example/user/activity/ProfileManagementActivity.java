@@ -69,7 +69,6 @@ public class ProfileManagementActivity extends TBSetUp {
 
         setupToolbar(toolbar);
 
-        // get id from SP
         SessionManager sessionManager = new SessionManager(this);
         int userId = sessionManager.getUserId();
 

@@ -1,17 +1,21 @@
 package com.example.user.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.user.R;
+import com.example.user.activity.BookDetailsActivity;
 import com.example.user.dto.BorrowedBookDTO;
 import com.google.android.material.card.MaterialCardView;
 
@@ -22,10 +26,22 @@ public class BorrowedBookAdapter extends RecyclerView.Adapter<BorrowedBookAdapte
 
     private List<BorrowedBookDTO> booksList;
     private Context context;
+    private final OnBookActionListener listener;
 
-    public BorrowedBookAdapter(List<BorrowedBookDTO> booksList, Context context) {
+    /**
+     * An interface to communicate button clicks from the adapter to the Activity.
+     * This decouples the adapter from the activity's specific logic.
+     */
+    public interface OnBookActionListener {
+        void onReturnBookClicked(BorrowedBookDTO book);
+        void onRenewBookClicked(BorrowedBookDTO book);
+        void onPayFineClicked(BorrowedBookDTO book);
+    }
+
+    public BorrowedBookAdapter(List<BorrowedBookDTO> booksList, Context context, OnBookActionListener listener) {
         this.booksList = booksList;
         this.context = context;
+        this.listener = listener;
     }
 
     @NonNull
@@ -48,6 +64,11 @@ public class BorrowedBookAdapter extends RecyclerView.Adapter<BorrowedBookAdapte
         holder.borrowedDate.setText("Borrowed: " + currentBooks.getIssued());
         holder.rackLocationValue.setText("" + currentBooks.getRack());
 
+        holder.renewButton.setVisibility(View.VISIBLE);
+        holder.returnButton.setText("Return Book");
+//        holder.returnButton.setBackgroundTintList(null);
+        holder.renewButton.setText("Renew Book");
+
         switch (currentBooks.getStatus()) {
             case GOOD_STANDING:
                 holder.bookStatus.setText("GOOD STANDING");
@@ -69,8 +90,24 @@ public class BorrowedBookAdapter extends RecyclerView.Adapter<BorrowedBookAdapte
                 holder.bookStatus.setTextColor(ContextCompat.getColor(context, R.color.status_overdue_text));
                 holder.cardView.setStrokeColor(ContextCompat.getColor(context, R.color.card_overdue_stroke));
                 holder.cardView.setStrokeWidth(4);
+
+                holder.renewButton.setVisibility(View.GONE);
+                holder.returnButton.setText("Pay Fine");
+                holder.returnButton.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(context, R.color.status_overdue_bg)));
                 break;
         }
+
+        holder.returnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String getText = holder.returnButton.getText().toString();
+                if (getText != null && getText.equals("Pay Fine")) {
+                    listener.onPayFineClicked(currentBooks);
+                } else {
+                    listener.onReturnBookClicked(currentBooks);
+                }
+            }
+        });
 
     }
 

@@ -27,6 +27,12 @@
             OVERDUE
         }
 
+        @SerializedName("issue_records_id")
+        private int issue_records_id;
+
+        @SerializedName("book_id")
+        private int book_id;
+
         @SerializedName("name")
         private String name;
 

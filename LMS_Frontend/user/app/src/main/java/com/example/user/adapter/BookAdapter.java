@@ -55,6 +55,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
                 Context context = view.getContext();
                 Intent intent = new Intent(context, BookDetailsActivity.class);
                 intent.putExtra("Book_ID", id);
+                intent.putExtra("SOURCE", "SearchBookActivity");
 //                Toast.makeText(context, "Selected Id: "+ id, Toast.LENGTH_SHORT).show();
                 context.startActivity(intent);
             }

@@ -167,6 +167,8 @@ router.get("/getUserById/:id", jwtAuth, (req, resp) => {
 
 router.get("/getBookDetails/:id", jwtAuth, (req, resp) => {
   const sql = `SELECT 
+                  ir.id AS issue_records_id,
+                  b.id AS book_id,
                   b.name,
                   b.author,
                   DATE_FORMAT(ir.issued, '%Y-%m-%d') AS issued,
@@ -182,6 +184,18 @@ router.get("/getBookDetails/:id", jwtAuth, (req, resp) => {
     if (err) return resp.status(404).send(apiError(err));
 
     resp.send(apiSuccess(result));
+  });
+});
+
+router.patch("/returnBook/:id", jwtAuth, (req, resp) => {
+  const sql = `UPDATE issue_records 
+                SET returned = CURDATE()
+                WHERE id = ?`;
+
+  db.query(sql, [req.params.id], (err, result) => {
+    if (err) return resp.status(404).send(apiError(err));
+
+    resp.send(apiSuccess("Book Return Successfully"));
   });
 });
 
