@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.user.R;
 import com.example.user.adapter.BookAdapter;
 import com.example.user.entities.Books;
+import com.example.user.toolbar_set_up.TBSetUp;
 import com.example.user.utils.ApiService;
 import com.example.user.utils.BackendResponse;
 import com.example.user.utils.RetrofitClient;
@@ -40,7 +41,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class SearchBookActivity extends AppCompatActivity {
+public class SearchBookActivity extends TBSetUp {
 
     Spinner spinnerSearchBy;
     Toolbar toolbar;
@@ -62,9 +63,7 @@ public class SearchBookActivity extends AppCompatActivity {
         editSearchQuery = findViewById(R.id.editSearchQuery);
         recyclerViewResult = findViewById(R.id.recyclerViewResults);
 
-        setSupportActionBar(toolbar);
-
-        setupToolbar();
+        setupToolbar(toolbar);
         setupSpinners();
         setupRecyclerView();
 
@@ -74,14 +73,6 @@ public class SearchBookActivity extends AppCompatActivity {
                 getBooks();
             }
         });
-    }
-
-    private void setupToolbar() {
-        setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
-        }
     }
 
     private void setupSpinners() {
@@ -113,15 +104,6 @@ public class SearchBookActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     private void getBooks() {
 
         String searchedCategory = spinnerSearchBy.getSelectedItem().toString().toLowerCase();
@@ -135,7 +117,7 @@ public class SearchBookActivity extends AppCompatActivity {
         Map<String, String> searchParams = new HashMap<>();
         searchParams.put(searchedCategory, searched);
 
-        ApiService apiService = RetrofitClient.getApiService();
+        ApiService apiService = RetrofitClient.getApiService(this);
         Call<BackendResponse> call = apiService.getBookByNAISP(searchParams);
 
         call.enqueue(new Callback<BackendResponse>() {
@@ -152,13 +134,15 @@ public class SearchBookActivity extends AppCompatActivity {
                             Type bookListType = new TypeToken<ArrayList<Books>>(){}.getType();
                             List<Books> booksData = new Gson().fromJson(dataElement, bookListType);
 
+                            Log.e(TAG, booksData.toString());
+
                             bookAdapter.updateBook(booksData);
 
                             Toast.makeText(SearchBookActivity.this, "Found " + booksData.size() + " books", Toast.LENGTH_SHORT).show();
-                            Log.d(TAG, "API Success: Found " + booksData.size() + " books.");
-                            for (Books book : booksData) {
-                                Log.d(TAG, "Book found: " + book.getName() + " by " + book.getAuthor());
-                            }
+//                            Log.d(TAG, "API Success: Found " + booksData.size() + " books.");
+//                            for (Books book : booksData) {
+//                                Log.d(TAG, "Book found: " + book.getId() + " by " + book.getAuthor());
+//                            }
                         } else {
                             bookAdapter.updateBook(new ArrayList<>());
                             Toast.makeText(SearchBookActivity.this, "Error: " + response.code(), Toast.LENGTH_SHORT).show();

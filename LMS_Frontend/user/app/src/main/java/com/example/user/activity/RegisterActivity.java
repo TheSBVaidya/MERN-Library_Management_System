@@ -74,7 +74,7 @@ public class RegisterActivity extends AppCompatActivity {
                     members.setPassword(password);
 
                     //get the APi service and create call
-                    ApiService apiService = RetrofitClient.getApiService();
+                    ApiService apiService = RetrofitClient.getApiService(getApplicationContext());
                     Call<BackendResponse> call = apiService.registerUser(members);
 
                     call.enqueue(new Callback<BackendResponse>() {

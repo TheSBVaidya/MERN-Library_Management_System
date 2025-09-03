@@ -24,7 +24,7 @@
 
             <!-- Welcome Message is now inside the Toolbar -->
             <TextView
-                android:id="@+id/tvWelcomeMessage"
+                android:id="@+id/tvWelcomeMsg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -65,7 +65,7 @@
                     style="@style/DashboardCard">
                     <LinearLayout style="@style/DashboardCardContent">
                         <ImageView style="@style/DashboardCardIcon" android:src="@drawable/ic_book" />
-                        <TextView style="@style/DashboardCardValue" android:text="3" />
+                        <TextView style="@style/DashboardCardValue" android:text="3" android:id="@+id/valueBookBorrowed"/>
                         <TextView style="@style/DashboardCardLabel" android:text="Books Borrowed" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -75,7 +75,7 @@
                     style="@style/DashboardCard">
                     <LinearLayout style="@style/DashboardCardContent">
                         <ImageView style="@style/DashboardCardIcon" android:src="@drawable/ic_history" />
-                        <TextView style="@style/DashboardCardValue" android:text="27" />
+                        <TextView style="@style/DashboardCardValue" android:text="27" android:id="@+id/valueTotalRead"/>
                         <TextView style="@style/DashboardCardLabel" android:text="Total Read" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -85,7 +85,7 @@
                     style="@style/DashboardCard">
                     <LinearLayout style="@style/DashboardCardContent">
                         <ImageView style="@style/DashboardCardIcon" android:src="@drawable/ic_payment" />
-                        <TextView style="@style/DashboardCardValue" android:text="₹0" />
+                        <TextView style="@style/DashboardCardValue" android:text="₹0" android:id="@+id/valueOutFines"/>
                         <TextView style="@style/DashboardCardLabel" android:text="Outstanding Fines" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -95,7 +95,7 @@
                     style="@style/DashboardCard">
                     <LinearLayout style="@style/DashboardCardContent">
                         <ImageView style="@style/DashboardCardIcon" android:src="@drawable/ic_calendar" />
-                        <TextView style="@style/DashboardCardValue" android:text="4" />
+                        <TextView style="@style/DashboardCardValue" android:text="4" android:id="@+id/valueDTR"/>
                         <TextView style="@style/DashboardCardLabel" android:text="Days to Return" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -134,6 +134,7 @@
 
                 <!-- Action 2: My Books -->
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/btnMyBooks"
                     style="@style/DashboardActionCard">
                     <LinearLayout style="@style/DashboardActionContent">
                         <ImageView style="@style/DashboardActionIcon" android:src="@drawable/ic_my_books" />
@@ -143,6 +144,7 @@
 
                 <!-- Action 3: Payment History -->
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/btnPaymentHistory"
                     style="@style/DashboardActionCard">
                     <LinearLayout style="@style/DashboardActionContent">
                         <ImageView style="@style/DashboardActionIcon" android:src="@drawable/ic_payment_history" />
@@ -152,6 +154,7 @@
 
                 <!-- Action 4: Recommendations (New Feature) -->
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/btnRecommend"
                     style="@style/DashboardActionCard">
                     <LinearLayout style="@style/DashboardActionContent">
                         <ImageView style="@style/DashboardActionIcon" android:src="@drawable/ic_recommend" />

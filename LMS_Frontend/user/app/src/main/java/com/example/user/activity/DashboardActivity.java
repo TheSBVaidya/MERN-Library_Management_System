@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,7 +20,8 @@ import com.google.android.material.card.MaterialCardView;
 public class DashboardActivity extends AppCompatActivity {
 
     Toolbar toolbar;
-    MaterialCardView btnSearchBook;
+    TextView tvWelcomeMsg, valueBookBorrowed, valueTotalRead, valueOutFines, valueDTR;
+    MaterialCardView btnSearchBook, btnMyBooks, btnPaymentHistory, btnRecommend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +30,19 @@ public class DashboardActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         btnSearchBook = findViewById(R.id.btnSearchBook);
+        btnMyBooks = findViewById(R.id.btnMyBooks);
+        btnPaymentHistory = findViewById(R.id.btnPaymentHistory);
+        btnRecommend = findViewById(R.id.btnRecommend);
+        tvWelcomeMsg = findViewById(R.id.tvWelcomeMsg);
+        valueBookBorrowed = findViewById(R.id.valueBookBorrowed);
+        valueTotalRead = findViewById(R.id.valueTotalRead);
+        valueOutFines = findViewById(R.id.valueOutFines);
+        valueDTR = findViewById(R.id.valueDTR);
+
 
         setSupportActionBar(toolbar);
+
+//        toolbar.setTitle("Welcome Aditi");
 
         btnSearchBook.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,6 +51,15 @@ public class DashboardActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        btnMyBooks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MyBorrowedBookActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override

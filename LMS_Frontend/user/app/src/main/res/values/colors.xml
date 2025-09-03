@@ -2,4 +2,20 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <!-- Good Standing Status -->
+    <color name="status_good_bg">#D1FAE5</color>
+    <color name="status_good_text">#065F46</color>
+
+    <!-- Due Soon Status -->
+    <color name="status_due_soon_bg">#FEF3C7</color>
+    <color name="status_due_soon_text">#92400E</color>
+    <color name="card_due_soon_stroke">#FBBF24</color>
+
+    <!-- Overdue Status -->
+    <color name="status_overdue_bg">#FEE2E2</color>
+    <color name="status_overdue_text">#991B1B</color>
+    <color name="card_overdue_stroke">#EF4444</color>
+
+    <!-- Default Card Stroke -->
+    <color name="card_default_stroke">#E5E7EB</color>
 </resources>

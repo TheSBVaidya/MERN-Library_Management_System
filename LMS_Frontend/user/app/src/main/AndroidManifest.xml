@@ -15,6 +15,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.User">
         <activity
+            android:name=".activity.MyBorrowedBookActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.UpdateProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.MyBorrowedBooksActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.BookDetailsActivity"
             android:exported="false" />
         <activity

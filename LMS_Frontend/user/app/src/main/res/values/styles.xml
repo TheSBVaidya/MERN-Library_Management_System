@@ -106,4 +106,44 @@
         <item name="android:orientation">vertical</item>
         <item name="android:padding">4dp</item>
     </style>
+
+    <!-- Styles for Borrowed Book Item Details -->
+    <style name="BookDetailItem" parent="">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_columnWeight">1</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:paddingBottom">8dp</item>
+    </style>
+
+<!--    <style name="BookDetailLabel" parent="TextAppearance.MaterialComponents.Caption">-->
+<!--        <item name="android:textColor">?android:attr/textColorSecondary</item>-->
+<!--    </style>-->
+
+<!--    <style name="BookDetailValue" parent="TextAppearance.MaterialComponents.Body2">-->
+<!--        <item name="android:textColor">@android:color/black</item>-->
+<!--    </style>-->
+
+    <!-- Base Style for Status Chips -->
+    <style name="StatusChipBase">
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingRight">8dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <!-- Specific Style for "Good Standing" Chip -->
+    <style name="StatusChipGood" parent="StatusChipBase">
+        <item name="android:background">@drawable/status_good_standing_bg</item>
+        <item name="android:textColor">#2F855A</item>
+    </style>
+
+    <!-- Specific Style for "Due Soon" Chip -->
+    <style name="StatusChipDueSoon" parent="StatusChipBase">
+        <item name="android:background">@drawable/status_due_soon_bg</item>
+        <item name="android:textColor">#B7791F</item>
+    </style>
 </resources>
