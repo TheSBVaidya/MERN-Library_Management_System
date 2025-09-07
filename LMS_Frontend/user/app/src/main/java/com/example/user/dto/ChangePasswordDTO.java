@@ -1,4 +1,4 @@
-package com.example.user.entities;
+package com.example.user.dto;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @RequiredArgsConstructor
-public class ChangePassword {
+public class ChangePasswordDTO {
 
     @SerializedName("currentPassword")
     String currPassword;

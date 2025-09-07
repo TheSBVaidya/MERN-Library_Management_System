@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+    </style>
+
+    <!-- Dashboard Card Styles -->
+    <style name="DashboardCard" parent="Widget.MaterialComponents.CardView">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_columnWeight">1</item>
+        <item name="android:layout_gravity">fill</item>
+        <item name="cardCornerRadius">8dp</item>
+        <item name="cardElevation">4dp</item>
+    </style>
+
+    <style name="DashboardCardContent">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">16dp</item>
+    </style>
+
+    <style name="DashboardCardIcon">
+        <item name="android:layout_width">32dp</item>
+        <item name="android:layout_height">32dp</item>
+        <!-- Corrected from app:tint to android:tint -->
+        <item name="android:tint">?attr/colorPrimary</item>
+    </style>
+
+    <style name="DashboardCardValue" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">8dp</item>
+    </style>
+
+    <style name="DashboardCardLabel" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <!-- Dashboard Action Card Styles -->
+    <style name="DashboardActionCard" parent="DashboardCard">
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+    </style>
+
+    <style name="DashboardActionContent">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">20dp</item>
+    </style>
+
+    <style name="DashboardActionIcon">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">40dp</item>
+        <!-- Corrected from app:tint to android:tint -->
+        <item name="android:tint">?attr/colorPrimary</item>
+    </style>
+
+    <style name="DashboardActionLabel" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">12dp</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <!-- Dashboard Section Header Style -->
+    <style name="DashboardSectionHeader" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">24dp</item>
+    </style>
+
+    <!-- Book Details Style -->
+    <style name="BookDetailLabel" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+    </style>
+
+    <style name="BookDetailValue" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+<!--    BookDetailsStyle-->
+    <style name="AvailabilityChip" parent="Widget.MaterialComponents.Chip.Action">
+        <item name="chipBackgroundColor">#E8F5E9</item> <!-- Light Green -->
+        <item name="android:textColor">#1B5E20</item> <!-- Dark Green -->
+        <item name="chipIconTint">#1B5E20</item>
+    </style>
+
+    <style name="BookDetailContainer">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_columnWeight">1</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:padding">4dp</item>
+    </style>
+
+    <!-- Styles for Borrowed Book Item Details -->
+    <style name="BookDetailItem" parent="">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_columnWeight">1</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:paddingBottom">8dp</item>
+    </style>
+
+<!--    <style name="BookDetailLabel" parent="TextAppearance.MaterialComponents.Caption">-->
+<!--        <item name="android:textColor">?android:attr/textColorSecondary</item>-->
+<!--    </style>-->
+
+<!--    <style name="BookDetailValue" parent="TextAppearance.MaterialComponents.Body2">-->
+<!--        <item name="android:textColor">@android:color/black</item>-->
+<!--    </style>-->
+
+    <!-- Base Style for Status Chips -->
+    <style name="StatusChipBase">
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingRight">8dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <!-- Specific Style for "Good Standing" Chip -->
+    <style name="StatusChipGood" parent="StatusChipBase">
+        <item name="android:background">@drawable/status_good_standing_bg</item>
+        <item name="android:textColor">#2F855A</item>
+    </style>
+
+    <!-- Specific Style for "Due Soon" Chip -->
+    <style name="StatusChipDueSoon" parent="StatusChipBase">
+        <item name="android:background">@drawable/status_due_soon_bg</item>
+        <item name="android:textColor">#B7791F</item>
+    </style>
+</resources>

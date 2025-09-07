@@ -6,11 +6,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @RequiredArgsConstructor
+@ToString
 public class Members {
     @SerializedName("id")
     private int id;
@@ -29,4 +31,7 @@ public class Members {
 
     @SerializedName("role")
     private String role;
+
+    @SerializedName("token")
+    private String token;
 }

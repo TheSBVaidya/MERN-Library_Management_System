@@ -1,18 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F5F5F5"
     tools:context=".activity.DashboardActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:backgroundTint="#E2E2E9"
-        app:title="LMS"
+    <!-- 1. App Bar for Title and Actions -->
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:background="?attr/colorSurface"
+        android:theme="@style/ThemeOverlay.AppCompat.Light">
 
-</LinearLayout>
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="LMS"
+            app:titleTextColor="@android:color/black"
+            app:menu="@menu/dashboard_menu">
+
+            <!-- Welcome Message is now inside the Toolbar -->
+            <TextView
+                android:id="@+id/tvWelcomeMsg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Welcome, John Doe"
+                android:textColor="@android:color/black"
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title" />
+
+        </com.google.android.material.appbar.MaterialToolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- 2. Main content area that can scroll -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <!-- 3. Summary Cards Section -->
+            <GridLayout
+                android:id="@+id/summaryGrid"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:columnCount="2"
+                android:rowCount="2"
+                android:useDefaultMargins="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <!-- Card 1: Books Borrowed -->
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/DashboardCard">
+                    <LinearLayout style="@style/DashboardCardContent">
+                        <ImageView style="@style/DashboardCardIcon" android:src="@drawable/ic_book" />
+                        <TextView style="@style/DashboardCardValue" android:text="3" android:id="@+id/valueBookBorrowed"/>
+                        <TextView style="@style/DashboardCardLabel" android:text="Books Borrowed" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Card 2: Total Books Read -->
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/DashboardCard">
+                    <LinearLayout style="@style/DashboardCardContent">
+                        <ImageView style="@style/DashboardCardIcon" android:src="@drawable/ic_history" />
+                        <TextView style="@style/DashboardCardValue" android:text="27" android:id="@+id/valueTotalRead"/>
+                        <TextView style="@style/DashboardCardLabel" android:text="Total Read" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Card 3: Outstanding Fines -->
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/DashboardCard">
+                    <LinearLayout style="@style/DashboardCardContent">
+                        <ImageView style="@style/DashboardCardIcon" android:src="@drawable/ic_payment" />
+                        <TextView style="@style/DashboardCardValue" android:text="₹0" android:id="@+id/valueOutFines"/>
+                        <TextView style="@style/DashboardCardLabel" android:text="Outstanding Fines" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Card 4: Next Return -->
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/DashboardCard">
+                    <LinearLayout style="@style/DashboardCardContent">
+                        <ImageView style="@style/DashboardCardIcon" android:src="@drawable/ic_calendar" />
+                        <TextView style="@style/DashboardCardValue" android:text="4" android:id="@+id/valueDTR"/>
+                        <TextView style="@style/DashboardCardLabel" android:text="Days to Return" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+            </GridLayout>
+
+            <!-- 4. Quick Actions Section -->
+            <TextView
+                android:id="@+id/tvQuickActions"
+                style="@style/DashboardSectionHeader"
+                android:text="Quick Actions"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/summaryGrid" />
+
+            <GridLayout
+                android:id="@+id/actionsGrid"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:columnCount="2"
+                android:rowCount="2"
+                android:useDefaultMargins="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvQuickActions">
+
+                <!-- Action 1: Search Books -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/btnSearchBook"
+                    style="@style/DashboardActionCard">
+                    <LinearLayout style="@style/DashboardActionContent">
+                        <ImageView style="@style/DashboardActionIcon" android:src="@drawable/ic_search" />
+                        <TextView style="@style/DashboardActionLabel" android:text="Search Books" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Action 2: My Books -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/btnMyBooks"
+                    style="@style/DashboardActionCard">
+                    <LinearLayout style="@style/DashboardActionContent">
+                        <ImageView style="@style/DashboardActionIcon" android:src="@drawable/ic_my_books" />
+                        <TextView style="@style/DashboardActionLabel" android:text="My Books" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Action 3: Payment History -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/btnPaymentHistory"
+                    style="@style/DashboardActionCard">
+                    <LinearLayout style="@style/DashboardActionContent">
+                        <ImageView style="@style/DashboardActionIcon" android:src="@drawable/ic_payment_history" />
+                        <TextView style="@style/DashboardActionLabel" android:text="Payment History" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Action 4: Recommendations (New Feature) -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/btnRecommend"
+                    style="@style/DashboardActionCard">
+                    <LinearLayout style="@style/DashboardActionContent">
+                        <ImageView style="@style/DashboardActionIcon" android:src="@drawable/ic_recommend" />
+                        <TextView style="@style/DashboardActionLabel" android:text="Recommendations" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+            </GridLayout>
+
+            <!-- 5. Recent Activity Section -->
+            <TextView
+                android:id="@+id/tvRecentActivity"
+                style="@style/DashboardSectionHeader"
+                android:text="Recent Activity"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/actionsGrid" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewRecentActivity"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvRecentActivity"
+                tools:listitem="@layout/item_recent_activity" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
