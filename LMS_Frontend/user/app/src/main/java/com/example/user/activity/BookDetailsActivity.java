@@ -68,7 +68,7 @@ public class BookDetailsActivity extends TBSetUp {
             public void onClick(View view) {
                 String getText = btnBorrow.getText().toString();
 //                Toast.makeText(BookDetailsActivity.this, "Button Clicked: " + getText, Toast.LENGTH_SHORT).show();
-                if (getText.equals("Borrow This Book")) {
+                if (getText.equals("Borrow")) {
 
                 } else if (getText.equals("Return Book")) {
                     int issue_records_id = 0;
@@ -115,6 +115,7 @@ public class BookDetailsActivity extends TBSetUp {
                                     tvSubject.setText(booksData.getSubject());
                                     chipAvailability.setText("Available - " + booksData.getAvailableCopies() +" copies in library");
                                     tvTotalCopies.setText(booksData.getTotalCopies() + " copies");
+                                    btnViewCopies.setVisibility(View.GONE);
                                 } else if (sourceValue.equals("MyBorrowedBookActivity")) {
                                     tvBookTitle.setText(booksData.getName());
                                     tvBookAuthor.setText("by "+ booksData.getAuthor());

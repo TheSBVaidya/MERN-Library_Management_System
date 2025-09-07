@@ -33,7 +33,7 @@ public class DashboardActivity extends AppCompatActivity {
         btnMyBooks = findViewById(R.id.btnMyBooks);
         btnPaymentHistory = findViewById(R.id.btnPaymentHistory);
         btnRecommend = findViewById(R.id.btnRecommend);
-        tvWelcomeMsg = findViewById(R.id.tvWelcomeMsg);
+//        tvWelcomeMsg = findViewById(R.id.tvWelcomeMsg);
         valueBookBorrowed = findViewById(R.id.valueBookBorrowed);
         valueTotalRead = findViewById(R.id.valueTotalRead);
         valueOutFines = findViewById(R.id.valueOutFines);
@@ -41,6 +41,7 @@ public class DashboardActivity extends AppCompatActivity {
 
 
         setSupportActionBar(toolbar);
+        toolbar.setTitle("LMS");
 
 //        toolbar.setTitle("Welcome Aditi");
 

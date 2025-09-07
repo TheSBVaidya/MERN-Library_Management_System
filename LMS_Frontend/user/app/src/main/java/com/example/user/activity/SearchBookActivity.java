@@ -7,9 +7,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -43,9 +45,10 @@ import retrofit2.Response;
 
 public class SearchBookActivity extends TBSetUp {
 
-    Spinner spinnerSearchBy;
+    AutoCompleteTextView spinnerSearchBy;
     Toolbar toolbar;
     Button btnSearch;
+    TextView tvResultCount;
     EditText editSearchQuery;
     RecyclerView recyclerViewResult;
     BookAdapter bookAdapter;
@@ -62,9 +65,10 @@ public class SearchBookActivity extends TBSetUp {
         btnSearch = findViewById(R.id.btnSearch);
         editSearchQuery = findViewById(R.id.editSearchQuery);
         recyclerViewResult = findViewById(R.id.recyclerViewResults);
+        tvResultCount = findViewById(R.id.tvResultCount);
 
         setupToolbar(toolbar);
-        setupSpinners();
+        setupDropdownMenu();
         setupRecyclerView();
 
         btnSearch.setOnClickListener(new View.OnClickListener() {
@@ -75,11 +79,20 @@ public class SearchBookActivity extends TBSetUp {
         });
     }
 
-    private void setupSpinners() {
+    private void setupDropdownMenu() {
         ArrayAdapter<CharSequence> searchByAdapter = ArrayAdapter.createFromResource(
                 this, R.array.search_by_array, android.R.layout.simple_spinner_item);
         searchByAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerSearchBy.setAdapter(searchByAdapter);
+
+        spinnerSearchBy.setOnItemClickListener((parent, view, position, id) -> {
+            String selectedItem = (String) parent.getItemAtPosition(position);
+            if ("ISBN".equals(selectedItem) || "Price".equals(selectedItem)) {
+                editSearchQuery.setInputType(InputType.TYPE_CLASS_NUMBER);
+            } else {
+                editSearchQuery.setInputType(InputType.TYPE_CLASS_TEXT);
+            }
+        });
     }
 
     private void setupRecyclerView() {
@@ -87,26 +100,11 @@ public class SearchBookActivity extends TBSetUp {
         // Initialize with an empty list
         bookAdapter = new BookAdapter(new ArrayList<>());
         recyclerViewResult.setAdapter(bookAdapter);
-
-        spinnerSearchBy.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String selectedItem = adapterView.getItemAtPosition(i).toString();
-                if (selectedItem.equals("ISBN") || selectedItem.equals("Price")) {
-                    editSearchQuery.setInputType(InputType.TYPE_CLASS_NUMBER);
-                } else {
-                    editSearchQuery.setInputType(InputType.TYPE_CLASS_TEXT);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {}
-        });
     }
 
     private void getBooks() {
 
-        String searchedCategory = spinnerSearchBy.getSelectedItem().toString().toLowerCase();
+        String searchedCategory = spinnerSearchBy.getText().toString().toLowerCase();
         String searched = editSearchQuery.getText().toString();
 
         if (searched.isEmpty()) {
