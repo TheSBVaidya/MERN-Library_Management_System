@@ -57,7 +57,6 @@ The system is designed with a decoupled frontend-backend architecture, where mul
 
 ## Screenshots
 
-*(It is highly recommended to add your own screenshots here to showcase the different applications)*
 
 ### Web Portals (Admin/Librarian)
 
@@ -83,48 +82,47 @@ Follow these steps to get the entire project running locally.
 -   A running [MySQL](https://www.mysql.com/downloads/) server
 
 ### 1. Backend Setup
-# 1. Clone the repository and navigate to the backend directory
-git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
-cd your-repo-name/backend
+#### 1. Clone the repository and navigate to the backend directory 
+    git clone [https://github.com/TheSBVaidya/MERN-Library_Management_System.git] cd your-repo-name/backend
 
-# 2. Install dependencies
-npm install
+#### 2. Install dependencies
+    npm install
 
-# 3. Create a .env file and add your database and JWT configuration
-DB_HOST=localhost
-DB_USER=your_mysql_user
-DB_PASSWORD=your_mysql_password
-DB_NAME=your_database_name
-JWT_SECRET=your_super_secret_key
+#### 3. Create a .env file and add your database and JWT configuration
+    DB_HOST=localhost
+    DB_USER=your_mysql_user
+    DB_PASSWORD=your_mysql_password
+    DB_NAME=your_database_name
+    JWT_SECRET=your_super_secret_key
 
-# 4. Initialize the database with the provided .sql schema file
+#### 4. Initialize the database with the provided .sql schema file
 
-# 5. Start the server
-npm start
+#### 5. Start the server
+    npm start
 
 ### 2. Web Frontend Setup (React)
-# 1. Navigate to the React app directory from the root folder
-cd ../react-admin-librarian  #<-- Change this to your folder name
+#### 1. Navigate to the React app directory from the root folder
+    cd ../react-admin-librarian  #<-- Change this to your folder name
 
-# 2. Install dependencies
-npm install
+#### 2. Install dependencies
+    npm install
 
-# 3. Create a .env file to specify the API URL if needed
-REACT_APP_API_URL=http://localhost:3000/api
 
-# 4. Start the React development server
-npm start
+#### 3. Start the React development server
+    npm start
 
 ### 3. Mobile Frontend Setup (Android)
-# 1. Open the android-user directory (or your folder name) in Android Studio.
-# 2. Allow Gradle to sync dependencies.
-# 3. Important: In your RetrofitClient.java file, update the BASE_URL to your computer's local network IP address (e.g., http://192.168.1.10:3000/api/). localhost will not work from the emulator.
-# 4. Build and run the app on an Android Emulator or a physical device.
+#### 1. Open the android-user directory (or your folder name) in Android Studio.
+#### 2. Allow Gradle to sync dependencies.
+#### 3. Important: In your RetrofitClient.java file, update the BASE_URL to your computer's local network IP address (e.g., http://192.168.1.10:3000/api/). localhost will not work from the emulator.
+#### 4. Build and run the app on an Android Emulator or a physical device.
 
-License
-Distributed under the MIT License. See LICENSE for more information.
+
+#
+**License
+Distributed under the MIT License.** See LICENSE for more information.
 
 Contact
-Sanjay Vaidya - [LinkedIn](https://www.linkedin.com/in/sanjay-vaidya-058758272/)
+- **Sanjay Vaidya** - [LinkedIn](https://www.linkedin.com/in/sanjay-vaidya-058758272/)
 
-Project Link: [https://github.com/your-username/your-repo-name](https://github.com/TheSBVaidya/MERN-Library_Management_System)
+- **Project Link:** [Project-Link](https://github.com/TheSBVaidya/MERN-Library_Management_System)
