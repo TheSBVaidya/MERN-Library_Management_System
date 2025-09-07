@@ -2,18 +2,17 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5"
+    android:background="?attr/colorSurfaceContainerLowest"
     tools:context=".activity.BookDetailsActivity">
 
-    <!-- App Bar with Back Navigation -->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorSurface"
-        android:theme="@style/ThemeOverlay.AppCompat.Light">
+        android:background="@android:color/transparent"
+        app:elevation="0dp"
+        app:liftOnScroll="true">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
@@ -23,23 +22,70 @@
             app:title="Book Details" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!-- Main Scrollable Content -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clipToPadding="false"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:paddingBottom="96dp">
 
-            <!-- 1. Main Title Card -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="8dp"
+                app:cardBackgroundColor="?attr/colorPrimaryContainer"
+                app:cardElevation="0dp"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.ExtraLarge.Bottom">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="24dp"
+                    android:paddingTop="24dp"
+                    android:paddingBottom="32dp">
+
+                    <TextView
+                        android:id="@+id/tvBookTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?attr/textAppearanceHeadline4"
+                        android:textColor="?attr/colorOnPrimaryContainer"
+                        android:textStyle="bold"
+                        tools:text="Clean Code: A Handbook of Agile Software Craftsmanship" />
+
+                    <TextView
+                        android:id="@+id/tvBookAuthor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:alpha="0.85"
+                        android:textAppearance="?attr/textAppearanceBody1"
+                        android:textColor="?attr/colorOnPrimaryContainer"
+                        tools:text="by Robert C. Martin" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipAvailability"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:textColor="?attr/colorOnPrimaryContainer"
+                        app:chipIcon="@drawable/ic_check"
+                        tools:text="Available - 3 copies in library" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="24dp"
+                app:cardCornerRadius="16dp"
                 app:cardElevation="4dp">
 
                 <LinearLayout
@@ -49,139 +95,73 @@
                     android:padding="16dp">
 
                     <TextView
-                        android:id="@+id/tvBookTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-                        tools:text="Clean Code: A Handbook of Agile Software Craftsmanship" />
+                        android:text="Book Information"
+                        android:textAppearance="?attr/textAppearanceHeadline6" />
 
-                    <TextView
-                        android:id="@+id/tvBookAuthor"
-                        android:layout_width="wrap_content"
+                    <GridLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                        tools:text="by Robert C. Martin" />
+                        android:layout_marginTop="16dp"
+                        android:columnCount="2"
+                        android:rowCount="2"
+                        android:useDefaultMargins="true">
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipAvailability"
-                        style="@style/AvailabilityChip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        app:chipIcon="@drawable/ic_check"
-                        tools:text="Available - 3 copies in library" />
+                        <LinearLayout style="@style/BookDetailContainer">
+                            <TextView style="@style/BookDetailLabel" android:text="ISBN" android:drawableStart="@drawable/ic_barcode" android:drawablePadding="8dp" android:drawableTint="?attr/colorPrimary"/>
+                            <TextView android:id="@+id/tvIsbn" style="@style/BookDetailValue" tools:text="978-0132350884" />
+                        </LinearLayout>
+                        <LinearLayout style="@style/BookDetailContainer">
+                            <TextView style="@style/BookDetailLabel" android:text="SUBJECT" android:drawableStart="@drawable/ic_category" android:drawablePadding="8dp" android:drawableTint="?attr/colorPrimary"/>
+                            <TextView android:id="@+id/tvSubject" style="@style/BookDetailValue" tools:text="Programming" />
+                        </LinearLayout>
+                        <LinearLayout style="@style/BookDetailContainer">
+                            <TextView style="@style/BookDetailLabel" android:text="PRICE" android:drawableStart="@drawable/ic_rupee" android:drawablePadding="8dp" android:drawableTint="?attr/colorPrimary"/>
+                            <TextView android:id="@+id/tvPrice" style="@style/BookDetailValue" tools:text="₹2,499" />
+                        </LinearLayout>
+                        <LinearLayout style="@style/BookDetailContainer">
+                            <TextView style="@style/BookDetailLabel" android:text="TOTAL COPIES" android:drawableStart="@drawable/ic_library_books" android:drawablePadding="8dp" android:drawableTint="?attr/colorPrimary"/>
+                            <TextView android:id="@+id/tvTotalCopies" style="@style/BookDetailValue" tools:text="5 copies" />
+                        </LinearLayout>
+                    </GridLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- 2. Details and Actions Row -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:baselineAligned="false"
-                android:orientation="horizontal">
-
-                <!-- Book Information Card -->
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.5"
-                    android:layout_marginEnd="8dp"
-                    app:cardCornerRadius="8dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="16dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Book Information"
-                            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
-
-                        <GridLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:columnCount="2"
-                            android:rowCount="2"
-                            android:useDefaultMargins="true">
-
-                            <LinearLayout style="@style/BookDetailContainer">
-                                <TextView style="@style/BookDetailLabel" android:text="ISBN" />
-                                <TextView android:id="@+id/tvIsbn" style="@style/BookDetailValue" tools:text="978-0132350884" />
-                            </LinearLayout>
-                            <LinearLayout style="@style/BookDetailContainer">
-                                <TextView style="@style/BookDetailLabel" android:text="SUBJECT" />
-                                <TextView android:id="@+id/tvSubject" style="@style/BookDetailValue" tools:text="Programming" />
-                            </LinearLayout>
-                            <LinearLayout style="@style/BookDetailContainer">
-                                <TextView style="@style/BookDetailLabel" android:text="PRICE" />
-                                <TextView android:id="@+id/tvPrice" style="@style/BookDetailValue" tools:text="₹2,499" />
-                            </LinearLayout>
-                            <LinearLayout style="@style/BookDetailContainer">
-                                <TextView style="@style/BookDetailLabel" android:text="TOTAL COPIES" />
-                                <TextView android:id="@+id/tvTotalCopies" style="@style/BookDetailValue" tools:text="5 copies" />
-                            </LinearLayout>
-                        </GridLayout>
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <!-- Quick Actions Card -->
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginStart="8dp"
-                    app:cardCornerRadius="8dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="16dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Quick Actions"
-                            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnBorrow"
-                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:text="Borrow This Book" />
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnViewCopies"
-                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="View All Copies" />
-
-<!--                        <TextView-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginTop="24dp"-->
-<!--                            android:text="Available Copies"-->
-<!--                            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />-->
-
-<!--                        <androidx.recyclerview.widget.RecyclerView-->
-<!--                            android:id="@+id/recyclerViewCopies"-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginTop="8dp"-->
-<!--                            tools:listitem="@layout/item_copy_status"-->
-<!--                            tools:itemCount="3"/>-->
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-            </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <!-- Improvement: A container for the bottom action buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="bottom"
+        android:padding="16dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnBorrow"
+            android:layout_margin="5dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingVertical="14dp"
+            android:layout_marginStart="8dp"
+            android:text="Borrow"
+            android:textSize="16sp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnViewCopies"
+            android:layout_margin="5dp"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingVertical="14dp"
+            android:layout_marginEnd="8dp"
+            android:text="View Copies"
+            android:textSize="16sp"/>
+
+    </LinearLayout>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

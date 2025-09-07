@@ -5,96 +5,90 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="12dp"
-    app:cardCornerRadius="8dp"
-    app:strokeWidth="1dp"
-    app:strokeColor="#E0E0E0">
+    app:cardCornerRadius="12dp"
+    app:cardElevation="0dp"
+    app:strokeColor="?attr/colorOutlineVariant"
+    app:strokeWidth="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp">
 
+        <ImageView
+            android:id="@+id/ivBookIcon"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_book"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="?attr/colorPrimary"
+            android:contentDescription="Book Icon" />
+
         <TextView
             android:id="@+id/tvBookTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="16dp"
+            android:textAppearance="?attr/textAppearanceTitleMedium"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivBookIcon"
+            app:layout_constraintTop_toTopOf="@id/ivBookIcon"
             tools:text="Clean Code: A Handbook of Agile Software Craftsmanship" />
 
         <TextView
             android:id="@+id/tvBookAuthor"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            android:textColor="?android:attr/textColorSecondary"
+            app:layout_constraintStart_toStartOf="@id/tvBookTitle"
+            app:layout_constraintEnd_toEndOf="@id/tvBookTitle"
             app:layout_constraintTop_toBottomOf="@id/tvBookTitle"
             tools:text="by Robert C. Martin" />
 
-        <!-- Details Grid -->
-        <GridLayout
-            android:id="@+id/detailsGrid"
-            android:layout_width="0dp"
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipSubject"
+            style="@style/Widget.Material3.Chip.Assist"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:columnCount="3"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvBookAuthor">
-
-            <!-- Subject -->
-            <LinearLayout android:layout_columnWeight="1" android:orientation="vertical">
-                <TextView style="@style/BookDetailLabel" android:text="SUBJECT" />
-                <TextView android:id="@+id/tvSubject" style="@style/BookDetailValue" tools:text="Programming" />
-            </LinearLayout>
-
-            <!-- ISBN -->
-            <LinearLayout android:layout_columnWeight="1" android:orientation="vertical">
-                <TextView style="@style/BookDetailLabel" android:text="ISBN" />
-                <TextView android:id="@+id/tvIsbn" style="@style/BookDetailValue" tools:text="978-0132350884" />
-            </LinearLayout>
-
-            <!-- Price -->
-            <LinearLayout android:layout_columnWeight="1" android:orientation="vertical">
-                <TextView style="@style/BookDetailLabel" android:text="PRICE" />
-                <TextView android:id="@+id/tvPrice" style="@style/BookDetailValue" tools:text="₹2,499" />
-            </LinearLayout>
-        </GridLayout>
+            android:layout_marginTop="12dp"
+            app:layout_constraintStart_toStartOf="@id/tvBookAuthor"
+            app:layout_constraintTop_toBottomOf="@id/tvBookAuthor"
+            tools:text="Programming" />
 
         <View
             android:id="@+id/divider"
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:background="?android:attr/listDivider"
             android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:background="?attr/colorOutlineVariant"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detailsGrid"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chipSubject" />
 
         <TextView
             android:id="@+id/tvAvailability"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:textColor="@android:color/holo_green_dark"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            android:textColor="?attr/colorPrimary"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/divider"
-            app:layout_constraintBottom_toBottomOf="parent"
             tools:text="3 copies available" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnViewDetails"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            style="@style/Widget.Material3.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="View Details"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tvAvailability"
-            app:layout_constraintBottom_toBottomOf="@id/tvAvailability"/>
+            app:layout_constraintBaseline_toBaselineOf="@id/tvAvailability"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

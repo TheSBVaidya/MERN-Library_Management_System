@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.user.R;
 import com.example.user.activity.BookDetailsActivity;
 import com.example.user.entities.Books;
+import com.google.android.material.chip.Chip;
 
 import java.util.List;
 
@@ -42,9 +43,10 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
         holder.tvBookTitle.setText(currentBooks.getName());
         holder.tvBookAuthor.setText("by " + currentBooks.getAuthor());
-        holder.tvSubject.setText(currentBooks.getSubject());
-        holder.tvIsbn.setText(currentBooks.getIsbn());
-        holder.tvPrice.setText("₹"+ currentBooks.getPrice());
+//        holder.tvSubject.setText(currentBooks.getSubject());
+        holder.chipSubject.setText(currentBooks.getSubject());
+//        holder.tvIsbn.setText(currentBooks.getIsbn());
+//        holder.tvPrice.setText("₹"+ currentBooks.getPrice());
         holder.tvAvailability.setText("Available");  // change later
 
         holder.btnViewDetails.setOnClickListener(new View.OnClickListener() {
@@ -76,15 +78,17 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
     public static class BookViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvBookTitle, tvBookAuthor, tvSubject, tvIsbn, tvPrice, tvAvailability;
+        TextView tvBookTitle, tvBookAuthor, tvAvailability;
+        Chip chipSubject;
         Button btnViewDetails;
         public BookViewHolder(@NonNull View itemView) {
             super(itemView);
             tvBookTitle = itemView.findViewById(R.id.tvBookTitle);
             tvBookAuthor = itemView.findViewById(R.id.tvBookAuthor);
-            tvSubject = itemView.findViewById(R.id.tvSubject);
-            tvIsbn = itemView.findViewById(R.id.tvIsbn);
-            tvPrice = itemView.findViewById(R.id.tvPrice);
+//            tvSubject = itemView.findViewById(R.id.tvSubject);
+//            tvIsbn = itemView.findViewById(R.id.tvIsbn);
+//            tvPrice = itemView.findViewById(R.id.tvPrice);
+            chipSubject = itemView.findViewById(R.id.chipSubject);
             tvAvailability = itemView.findViewById(R.id.tvAvailability);
             btnViewDetails = itemView.findViewById(R.id.btnViewDetails);
         }

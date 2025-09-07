@@ -146,4 +146,32 @@
         <item name="android:background">@drawable/status_due_soon_bg</item>
         <item name="android:textColor">#B7791F</item>
     </style>
+
+    <style name="Widget.Material3.Button.Primary" parent="">
+        <!-- Example: Make the button corners slightly more rounded than the default -->
+        <item name="cornerRadius">16dp</item>
+
+        <!-- Example: Set a standard vertical padding for a taller button -->
+        <item name="android:paddingTop">14dp</item>
+        <item name="android:paddingBottom">14dp</item>
+
+        <!-- Example: Define the text appearance -->
+        <item name="android:textAppearance">?attr/textAppearanceTitleMedium</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Style that recreates the effect of "ShapeAppearance.Material3.Corner.ExtraLarge.Bottom" -->
+    <style name="ShapeAppearance.Material3.Corner.ExtraLarge.Bottom" parent="">
+        <!-- Defines the shape of the corners as rounded -->
+        <item name="cornerFamily">rounded</item>
+
+        <!-- Top corners are kept sharp (0dp radius) -->
+        <item name="cornerSizeTopLeft">0dp</item>
+        <item name="cornerSizeTopRight">0dp</item>
+
+        <!-- Bottom corners are given a large radius for the curved effect -->
+        <item name="cornerSizeBottomLeft">28dp</item>
+        <item name="cornerSizeBottomRight">28dp</item>
+    </style>
+
 </resources>
