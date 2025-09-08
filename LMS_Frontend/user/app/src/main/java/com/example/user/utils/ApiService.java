@@ -14,7 +14,7 @@ import retrofit2.http.QueryMap;
 
 public interface ApiService {
 
-    String BASE_URL = "http://192.168.44.105:3000";
+    String BASE_URL = "http://192.168.44.100:3000";
 
     @POST("/members/register")
     Call<BackendResponse> registerUser(@Body Members members);
