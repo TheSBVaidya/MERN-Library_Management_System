@@ -60,9 +60,9 @@ The system is designed with a decoupled frontend-backend architecture, where mul
 
 ### Web Portals (Admin/Librarian)
 
-| Admin Dashboard                             | Book Management                             |
+| Admin Login-Screen                             | Admin Dashboard                             |
 | ------------------------------------------- | ------------------------------------------- |
-| ![Admin Dashboard](docs/screenshots/admin-dashboard.png) | ![Book Management](docs/screenshots/book-management.png) |
+| ![Admin Login-Screen](docs/screenshots/admin-login.png) | ![Admin Dashboard](docs/screenshots/admin-dashboard.png)|
 
 ### Android App (User)
 
