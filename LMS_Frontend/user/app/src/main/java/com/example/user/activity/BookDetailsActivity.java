@@ -69,7 +69,7 @@ public class BookDetailsActivity extends TBSetUp {
                 String getText = btnBorrow.getText().toString();
 //                Toast.makeText(BookDetailsActivity.this, "Button Clicked: " + getText, Toast.LENGTH_SHORT).show();
                 if (getText.equals("Borrow")) {
-
+                    // TODO: Borrowed Book Details
                 } else if (getText.equals("Return Book")) {
                     int issue_records_id = 0;
 
