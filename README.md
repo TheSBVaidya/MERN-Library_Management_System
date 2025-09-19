@@ -64,6 +64,10 @@ The system is designed with a decoupled frontend-backend architecture, where mul
 | ------------------------------------------- | ------------------------------------------- |
 | ![Admin Login-Screen](docs/screenshots/admin-login.png) | ![Admin Dashboard](docs/screenshots/admin-dashboard.png)|
 
+| Librarian Login-Screen                             | Librarian Dashboard                             |
+| ------------------------------------------- | ------------------------------------------- |
+| ![Admin Login-Screen](docs/screenshots/librariyan-login.png) | ![Admin Dashboard](docs/screenshots/librariyan-dashboard.png)|
+
 ### Android App (User)
 
 | Login Screen                                | Dashboard                                   |
